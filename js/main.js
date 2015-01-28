@@ -1,7 +1,26 @@
-var mainApp = angular.module("thanku", []);
+var mainApp = angular.module("thanku", [])
+    .config(function($locationProvider) {
+    $locationProvider.html5Mode(true).hashPrefix('!');
+});
 
-mainApp.controller("LoginController", ['$scope', function($scope) {
+mainApp
 
+mainApp.controller("LoginController", ['$scope', function($scope, $location) {
+    $scope.$location = {};
+    $scope.init = function(){
+        $scope.usernameError = null;
+        $scope.passwordError = null;
+    };
+
+    $scope.login = function(){
+        if($scope.username != null && $scope.password != null)
+        {
+            $location.call('/dashboard.html');
+        }
+
+        $scope.username == null ? $scope.usernameError = "Username is required." : $scope.usernameError = null;
+        $scope.password == null ? $scope.passwordError = "Password is required." : $scope.passwordError = null;
+    };
 }]);
 
 mainApp.controller("UserListController", ['$scope', function($scope) {

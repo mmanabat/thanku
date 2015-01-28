@@ -115,6 +115,31 @@ textarea {
     margin-top: 20px;
 }
 
+.login-btn:hover{
+    color:#ffffff;
+    border: 0;
+    margin-top: 20px;
+}
+
+.login-btn:active{
+    color:#ffffff;
+    border: 0;
+    margin-top: 20px;
+}
+
+.login-btn:focus{
+    color:#ffffff;
+    border: 0;
+    margin-top: 20px;
+}
+
+p.login-error-msg{
+    text-align:center;
+    font-size: 11px;
+    margin: 2px;
+    color:red;
+}
+
 .login-username {
     border-radius: 10px 10px 0 0;
     min-height: 45px;
@@ -147,8 +172,8 @@ textarea {
 }
 
 .form-panel {
-    padding-top: 15px;
-    padding-bottom: 50px;
+    margin-top: 15px;
+    margin-bottom: 40px;
 }
 
 html {

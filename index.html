@@ -35,18 +35,16 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-lg-8 col-lg-offset-2 form-panel" ng-controller="loginController">
-                            <form class="loginForm row" name="loginForm" novalidate>
+                        <div class="col-lg-8 col-lg-offset-2 form-panel" ng-controller="LoginController">
+                            <div class="row" name="loginForm" novalidate ng-init="init()">
                                 <div class="form-group col-lg-12">
                                     <input class="form-control login-username" type="text" ng-model="username" id="inputUsername" placeholder="Username" required>
                                     <input class="form-control login-password" type="password" ng-model="password" id="inputpassword" placeholder="Password" required>
-                                    <span style="color:red" ng-show="loginForm.username.$dirty && loginForm.username.$invalid">
-                                        <span ng-show="loginForm.username.$error.required">Username is required.</span>
-                                    </span>
-                                    <p ng-show="loginForm.password.$error.required">Password is required.</p>
+                                    <p class="login-error-msg" ng-hide="usernameError == null">{{usernameError}}</p>
+                                    <p class="login-error-msg" ng-hide="passwordError == null">{{passwordError}}</p>
                                     <button class="btn login-btn primary center-block" ng-click="login()" type="button">Login</button>
                                 </div>
-                            </form>
+                            </div>
                         </div>
                     </div>
                 </div>
