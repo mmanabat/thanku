@@ -1,10 +1,28 @@
 var mainApp = angular.module("thanku", []);
 
-mainApp.controller("loginController", function ($scope) {
-    $scope.username = "Username";
-    $scope.password = "Password";
+mainApp
 
-    $scope.login = function () {
-        alert($scope.username + $scope.password);
-    }
-});
+mainApp.controller("LoginController", ['$scope', function($scope) {
+
+}]);
+
+mainApp.controller("UserListController", ['$scope', function($scope) {
+    $scope.userFilter = "";
+
+    $scope.userList = [
+        {"name" : "Billy", "picture": ""},
+        {"name" : "Maricar", "picture": ""},
+        {"name" : "Steph", "picture": ""},
+        {"name" : "Mark", "picture": ""},
+        {"name" : "Tops", "picture": ""},
+        {"name" : "Benj", "picture": ""},
+    ];
+}]);
+
+mainApp.controller("NewsFeedController", ['$scope', function($scope) {
+
+}]);
+
+mainApp.controller("TopThreeController", ['$scope', function($scope) {
+
+}]);

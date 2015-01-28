@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html ng-app="thanku">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/vendor/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/dashboard.css">
+    <script src="js/vendor/modernizr-2.6.2.min.js"></script>
+    <script src="js/vendor/angular.min.js"></script>
+    <script src="js/vendor/angular-route.min.js"></script>
+    <script src="js/main.js"></script>
+</head>
+<body ng-cloak="true">
+    <div class="container-fluid no-padding-lr">
+        <header class="padded">
+            <nav>
+                <img class="img img-responsive logo" src="img/logo.PNG" alt="Thanku"/>
+            </nav>
+        </header>
+        <div class="row dashboard padded">
+            <div class="col-lg-3 col-md-3 dashboard-view user-list" ng-controller="UserListController">
+                <h3 class="text-center">
+                    User List
+                </h3>
+                <hr/>
+                <input type="text" ng-model="userFilter" placeholder="Search user" value="" style="width: 100%; margin-bottom: 5px" />
+                <br/>
+                <div class="no-user-found" ng-hide="filteredUser.length">
+                    <p class="text-center">
+                        No user found. . .
+                    </p>
+                </div>
+                <div class="user-box-wrapper">
+                    <div class="user-box padded" ng-repeat="user in filteredUser = (userList | filter:{name:userFilter})">
+                        <div class="glyphicon glyphicon-user user-picture"></div>
+                        <div class="user-name">
+                            {{user.name}}
+                        </div>
+                        <div class="user-vote-btn">
+                            <button class="btn-primary">
+                                <span class="glyphicon glyphicon-star"></span>
+                            </button>
+                            <button class="btn-primary">
+                                <span class="glyphicon glyphicon-star"></span>
+                                <span class="glyphicon glyphicon-star"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 dashboard-view news-feed">
+                <h3 class="text-center">
+                    News Feed
+                </h3>
+            </div>
+            <div class="col-lg-3 col-md-3 dashboard-view top-three">
+                <h3 class="text-center">
+                    Top 3
+                </h3>
+            </div>
+        </div>
+    </div>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
+    <script src="js/vendor/bootstrap.min.js"></script>
+    <script src="js/plugins.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

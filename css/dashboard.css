@@ -1,0 +1,59 @@
+header {
+    background-color: #00BEFF;
+}
+
+.logo {
+    width: 150px
+}
+
+.dashboard {
+    max-height: 400px;
+}
+
+.dashboard-view {
+
+}
+
+.user-box-wrapper {
+    max-height: 420px;
+    overflow: auto;
+}
+
+.user-box {
+    height: 75px;
+    border: 1px solid pink;
+    position: relative;
+    margin: 5px
+}
+
+.user-picture {
+    position: absolute;
+    font-size: 70px;
+    z-index: 5;
+    top: 5px;
+}
+
+.user-name {
+    position: absolute;
+    font-size: 20px;
+    left: 100px;
+}
+
+.user-vote-btn {
+    position: absolute;
+    bottom: 0;
+    left: 100px;
+}
+
+/*
+*   Custom css. . .
+*/
+
+.no-padding-lr {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.padded {
+    padding: 10px;
+}
