@@ -20,7 +20,7 @@ header {
 }
 
 .user-box {
-    height: 75px;
+    height: 90px;
     border: 1px solid pink;
     position: relative;
     margin: 5px
@@ -37,12 +37,18 @@ header {
     position: absolute;
     font-size: 20px;
     left: 100px;
+    top: 0;
 }
 
 .user-vote-btn {
     position: absolute;
-    bottom: 0;
+    bottom: 5px;
     left: 100px;
+}
+
+.news-feed-wrapper {
+    max-height: 420px;
+    overflow: auto;
 }
 
 /*

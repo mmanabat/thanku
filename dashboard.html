@@ -5,12 +5,9 @@
     <title>Dashboard</title>
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/vendor/bootstrap.min.css" />
     <link rel="stylesheet" href="css/dashboard.css">
-    <script src="js/vendor/modernizr-2.6.2.min.js"></script>
-    <script src="js/vendor/angular.min.js"></script>
-    <script src="js/vendor/angular-route.min.js"></script>
-    <script src="js/main.js"></script>
+    <link rel="stylesheet" href="css/vendor/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/vendor/toastr.css" />
 </head>
 <body ng-cloak="true">
     <div class="container-fluid no-padding-lr">
@@ -77,10 +74,28 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6 col-md-6 dashboard-view news-feed">
+            <div class="col-lg-6 col-md-6 dashboard-view news-feed" ng-controller="NewsFeedController" ng-init="init()">
                 <h3 class="text-center">
-                    News Feed
+                    News Feed ({{newsFeed.length}})
                 </h3>
+                <hr/>
+                <div class="news-feed-wrapper">
+                    <div class="panel panel-primary" ng-repeat="nf in newsFeed | orderBy:'-timestamp'">
+                        <div class="panel-heading">
+                            <div class="panel-title">
+                                Someone gave a thanks!
+                                <small class="pull-right">
+                                    <em>
+                                        {{getMomentTime(nf.timestamp)}}
+                                    </em>
+                                </small>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            {{nf.user.name}} gave {{nf.point}} point(s) to {{nf.recipient.name}}
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="col-lg-3 col-md-3 dashboard-view top-three">
                 <h3 class="text-center">
@@ -92,6 +107,12 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
     <script src="js/vendor/bootstrap.min.js"></script>
+    <script src="js/vendor/modernizr-2.6.2.min.js"></script>
+    <script src="js/vendor/angular.min.js"></script>
+    <script src="js/vendor/angular-route.min.js"></script>
+    <script src="js/vendor/restangular.js"></script>
+    <script src="js/vendor/moment.js"></script>
+    <script src="js/vendor/toastr.js"></script>
     <script src="js/plugins.js"></script>
     <script src="js/main.js"></script>
 </body>
