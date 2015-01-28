@@ -77,6 +77,10 @@ fieldset {
 /*
  * Allow only vertical resizing of textareas.
  */
+.ad-m-tb-120 {
+    margin-top: 120px;
+    margin-bottom: 120px;
+}
 
 textarea {
     resize: vertical;
@@ -97,16 +101,63 @@ textarea {
    Author's custom styles
    ========================================================================== */
 .logo-img {
-    background: url('../img/ThankU_logo_pink.png') no-repeat center center;
+    background: url('../img/logo_1.png') no-repeat center center;
     height: 200px;
 }
 
+.primary {
+    background-color: #FF69B4;
+    color: white;
+}
+
+.login-btn {
+    width: 100%;
+    border-radius: 20px;
+}
+
+.login-username {
+    border-radius: 10px 10px 0 0;
+    min-height: 45px;
+    text-align: center;
+    border-top: 1px solid #FF69B4;
+    border-left: 1px solid #FF69B4;
+    border-right: 1px solid #FF69B4;
+    border-bottom: 1px solid #FFD5EA;
+}
+
+.login-password {
+    border-radius: 0 0 10px 10px;
+    min-height: 45px;
+    text-align: center;
+    border-top: 1px solid #FFD5EA;
+    border-left: 1px solid #FF69B4;
+    border-right: 1px solid #FF69B4;
+    border-bottom: 1px solid #FF69B4;
+}
+
+.text {
+    color: white;
+    position: fixed;
+    z-index: 10;
+}
+
+.login-panel {
+    background-color: rgba(255, 213, 243, 0.90);
+    border-radius: 20px;
+}
+
+.form-panel {
+    padding-top: 15px;
+    padding-bottom: 50px;
+}
+
 html {
-    /*background: url(../img/background.png) no-repeat center center fixed;*/
+    background: url(../img/background1.jpg) no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+    filter: grayscale(100%);
 }
 
 #formWrapper {
