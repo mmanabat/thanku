@@ -77,9 +77,8 @@ fieldset {
 /*
  * Allow only vertical resizing of textareas.
  */
-.ad-m-tb-120 {
-    margin-top: 120px;
-    margin-bottom: 120px;
+.ad-m-t-80 {
+    margin-top: 80px;
 }
 
 textarea {
@@ -113,6 +112,7 @@ textarea {
 .login-btn {
     width: 100%;
     border-radius: 20px;
+    margin-top: 20px;
 }
 
 .login-username {

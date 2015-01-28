@@ -28,7 +28,7 @@
     <!-- Add your site or application content here -->
     <div class="container-fluid col-lg-12 col-md-12 img-background">
         <div id="formWrapper" class="col-lg-6 col-md-6 center-block">
-            <div class="row ad-m-tb-120">
+            <div class="row ad-m-t-80">
                 <div class="col-lg-10 col-lg-offset-1 login-panel">
                     <div class="row ">
                         <div class="col-lg-12 logo-img">
@@ -39,13 +39,11 @@
                             <form class="loginForm row" name="loginForm" novalidate>
                                 <div class="form-group col-lg-12">
                                     <input class="form-control login-username" type="text" ng-model="username" id="inputUsername" placeholder="Enter username" required>
+                                    <input class="form-control login-password" type="password" ng-model="password" id="inputpassword" placeholder="Password" required>
                                     <span style="color:red" ng-show="loginForm.username.$dirty && loginForm.username.$invalid">
                                         <span ng-show="loginForm.username.$error.required">Username is required.</span>
                                     </span>
-                                    <input class="form-control login-password" type="password" ng-model="password" id="inputpassword" placeholder="Password" required>
-                                    <span ng-show="loginForm.password.$error.required">Password is required.</span>
-                                    <br />
-                                    <br />
+                                    <p ng-show="loginForm.password.$error.required">Password is required.</p>
                                     <button class="btn login-btn primary center-block" ng-click="login()" type="button">Login</button>
                                 </div>
                             </form>
