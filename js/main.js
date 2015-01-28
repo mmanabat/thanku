@@ -1,11 +1,8 @@
-var mainApp = angular.module("thanku", [])
-    .config(function($locationProvider) {
-    $locationProvider.html5Mode(true).hashPrefix('!');
-});
+var mainApp = angular.module("thanku", []);
 
 mainApp
 
-mainApp.controller("LoginController", ['$scope', function($scope, $location) {
+mainApp.controller("LoginController", ['$scope', '$location', function($scope, $location) {
     $scope.$location = {};
     $scope.init = function(){
         $scope.usernameError = null;
@@ -13,13 +10,14 @@ mainApp.controller("LoginController", ['$scope', function($scope, $location) {
     };
 
     $scope.login = function(){
-        if($scope.username != null && $scope.password != null)
-        {
-            $location.call('/dashboard.html');
-        }
-
         $scope.username == null ? $scope.usernameError = "Username is required." : $scope.usernameError = null;
         $scope.password == null ? $scope.passwordError = "Password is required." : $scope.passwordError = null;
+
+        if($scope.username != null && $scope.password != null)
+        {
+            toastr.success("Successfully Logged in.");
+            window.location.href = "dashboard.html";
+        }
     };
 }]);
 
@@ -52,7 +50,6 @@ mainApp.controller("NewsFeedController", ['$scope', '$http', function($scope, $h
     };
 
     $scope.getNewsFeed = function() {
-
         var promise = $http({
             method: "GET",
             async: true,
@@ -62,7 +59,9 @@ mainApp.controller("NewsFeedController", ['$scope', '$http', function($scope, $h
         promise.success( function(data) {
             $scope.newsFeed = data.credits;
             if($scope.currentNumberOfNewsFeed != data.credits.length && $scope.currentNumberOfNewsFeed != 0)
+            {
                 toastr.success("Someone gave a thanks! Check it out!");
+            }
         }).error( function(data) {
             toastr.error(data);
         });
