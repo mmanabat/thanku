@@ -39,13 +39,40 @@
                             {{user.name}}
                         </div>
                         <div class="user-vote-btn">
-                            <button class="btn-primary">
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".mini-modal-sm" ng-click="vote(1)">
                                 <span class="glyphicon glyphicon-star"></span>
                             </button>
-                            <button class="btn-primary">
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".mini-modal-sm" ng-click="vote(2)">
                                 <span class="glyphicon glyphicon-star"></span>
                                 <span class="glyphicon glyphicon-star"></span>
                             </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade mini-modal-sm" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-sm">
+                        <div class="modal-content">
+                            <form action="" ng-submit="">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h3 class="modal-title" id="modalLabel">Why oh! Why?</h3>
+                                </div>
+                                <div class="modal-body">
+                                    <h4>
+                                        Message
+                                        <small>
+                                            <em class="pull-right">
+                                                +{{pointsGiven}} point(s)!
+                                            </em>
+                                        </small>
+                                    </h4>
+                                    <textarea name="message" id="" cols="30" rows="5" required="required"></textarea>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary">Send your thanks!</button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>

@@ -8,6 +8,7 @@ mainApp.controller("LoginController", ['$scope', function($scope) {
 
 mainApp.controller("UserListController", ['$scope', function($scope) {
     $scope.userFilter = "";
+    $scope.pointsGiven = 0;
 
     $scope.userList = [
         {"name" : "Billy", "picture": ""},
@@ -17,6 +18,11 @@ mainApp.controller("UserListController", ['$scope', function($scope) {
         {"name" : "Tops", "picture": ""},
         {"name" : "Benj", "picture": ""},
     ];
+
+
+    $scope.vote = function(point) {
+        $scope.pointsGiven = point;
+    };
 }]);
 
 mainApp.controller("NewsFeedController", ['$scope', function($scope) {
