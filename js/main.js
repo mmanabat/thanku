@@ -45,6 +45,7 @@ mainApp.controller("UserListController", ['$scope', function($scope) {
 mainApp.controller("NewsFeedController", ['$scope', '$http', function($scope, $http) {
 
     var baseUrl = "http://13d6f749.ngrok.com";
+    $scope.currentNumberOfNewsFeed = 0;
 
     $scope.init = function() {
         $scope.getNewsFeed();
@@ -60,9 +61,12 @@ mainApp.controller("NewsFeedController", ['$scope', '$http', function($scope, $h
 
         promise.success( function(data) {
             $scope.newsFeed = data.credits;
+            if($scope.currentNumberOfNewsFeed != data.credits.length && $scope.currentNumberOfNewsFeed != 0)
+                toastr.success("Someone gave a thanks! Check it out!");
         }).error( function(data) {
             toastr.error(data);
         });
+        $scope.currentNumberOfNewsFeed = $scope.newsFeed.length;
     };
 
     $scope.getMomentTime = function(timestamp) {
