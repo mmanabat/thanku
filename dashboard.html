@@ -4,110 +4,151 @@
     <meta charset="UTF-8">
     <title>Dashboard</title>
     <link rel="stylesheet" href="css/normalize.css">
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/dashboard.css">
+    <!-- <link rel="stylesheet" href="css/main.css"> -->
+    <!-- <link rel="stylesheet" href="css/dashboard.css"> -->
     <link rel="stylesheet" href="css/vendor/bootstrap.min.css" />
-    <link rel="stylesheet" href="css/vendor/toastr.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.2.2/css/material-wfont.css" />
 </head>
 <body ng-cloak="true">
-    <div class="container-fluid no-padding-lr">
-        <header class="padded">
-            <nav>
-                <img class="img img-responsive logo" src="img/logo.PNG" alt="Thanku"/>
-            </nav>
-        </header>
-        <div class="row dashboard padded">
-            <div class="col-lg-3 col-md-3 dashboard-view user-list" ng-controller="UserListController">
-                <h3 class="text-center">
-                    User List
-                </h3>
-                <hr/>
-                <input type="text" ng-model="userFilter" placeholder="Search user" value="" style="width: 100%; margin-bottom: 5px" />
-                <br/>
-                <div class="no-user-found" ng-hide="filteredUser.length">
-                    <p class="text-center">
-                        No user found. . .
-                    </p>
-                </div>
-                <div class="user-box-wrapper">
-                    <div class="user-box padded" ng-repeat="user in filteredUser = (userList | filter:{name:userFilter})">
-                        <div class="glyphicon glyphicon-user user-picture"></div>
-                        <div class="user-name">
-                            {{user.name}}
-                        </div>
-                        <div class="user-vote-btn">
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".mini-modal-sm" ng-click="vote(1)">
-                                <span class="glyphicon glyphicon-star"></span>
-                            </button>
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".mini-modal-sm" ng-click="vote(2)">
-                                <span class="glyphicon glyphicon-star"></span>
-                                <span class="glyphicon glyphicon-star"></span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal fade mini-modal-sm" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-sm">
-                        <div class="modal-content">
-                            <form action="" ng-submit="">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                    <h3 class="modal-title" id="modalLabel">Why oh! Why?</h3>
-                                </div>
-                                <div class="modal-body">
-                                    <h4>
-                                        Message
-                                        <small>
-                                            <em class="pull-right">
-                                                +{{pointsGiven}} point(s)!
-                                            </em>
-                                        </small>
-                                    </h4>
-                                    <textarea name="message" id="" cols="30" rows="5" required="required"></textarea>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                    <button type="submit" class="btn btn-primary">Send your thanks!</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6 col-md-6 dashboard-view news-feed" ng-controller="NewsFeedController" ng-init="init()">
-                <h3 class="text-center">
-                    News Feed ({{newsFeed.length}})
-                </h3>
-                <hr/>
-                <div class="news-feed-wrapper">
-                    <div class="panel panel-primary" ng-repeat="nf in newsFeed | orderBy:'-timestamp'">
-                        <div class="panel-heading">
-                            <div class="panel-title">
-                                Someone gave a thanks!
-                                <small class="pull-right">
-                                    <em>
-                                        {{getMomentTime(nf.timestamp)}}
-                                    </em>
-                                </small>
-                            </div>
-                        </div>
-                        <div class="panel-body">
-                            {{nf.user.name}} gave {{nf.point}} point(s) to {{nf.recipient.name}}
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-3 dashboard-view top-three">
-                <h3 class="text-center">
-                    Top 3
-                </h3>
-            </div>
-        </div>
+  <div class="navbar navbar-warning">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Thank u</a>
     </div>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
-    <script src="js/vendor/bootstrap.min.js"></script>
-    <script src="js/vendor/modernizr-2.6.2.min.js"></script>
+  </div>
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-3">
+        <input type="text" ng-model="userFilter" placeholder="Search users", value="" class="form-control" />
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-3">
+        <div class="user-box padded" ng-repeat="user in filteredUser = (userList | filter:{name:userFilter})">
+          <div class="glyphicon glyphicon-user user-picture"></div>
+            <div class="user-name">
+              {{user.name}}
+            </div>
+
+            <div class="user-vote-btn">
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".mini-modal-sm" ng-click="vote(1)">
+                <span class="glyphicon glyphicon-star"></span>
+              </button>
+
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".mini-modal-sm" ng-click="vote(2)">
+                <span class="glyphicon glyphicon-star"></span>
+                <span class="glyphicon glyphicon-star"></span>
+              </button>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+
+    <!-- <div class="container-fluid no-padding-lr"> -->
+    <!--     <header class="padded"> -->
+    <!--         <nav> -->
+    <!--             <img class="img img-responsive logo" src="img/logo.PNG" alt="Thanku"/> -->
+    <!--         </nav> -->
+    <!--     </header> -->
+    <!--     <div class="row dashboard padded"> -->
+    <!--         <div class="col-lg-3 col-md-3 dashboard-view user-list" ng-controller="UserListController"> -->
+    <!--             <h3 class="text-center"> -->
+    <!--                 User List -->
+    <!--             </h3> -->
+    <!--             <hr/> -->
+    <!--             <input type="text" ng-model="userFilter" placeholder="Search user" value="" style="width: 100%; margin-bottom: 5px" /> -->
+    <!--             <br/> -->
+    <!--             <div class="no-user-found" ng-hide="filteredUser.length"> -->
+    <!--                 <p class="text-center"> -->
+    <!--                     No user found. . . -->
+    <!--                 </p> -->
+    <!--             </div> -->
+    <!--             <div class="user-box-wrapper"> -->
+    <!--                 <div class="user-box padded" ng-repeat="user in filteredUser = (userList | filter:{name:userFilter})"> -->
+    <!--                     <div class="glyphicon glyphicon-user user-picture"></div> -->
+    <!--                     <div class="user-name"> -->
+    <!--                         {{user.name}} -->
+    <!--                     </div> -->
+    <!--                     <div class="user-vote-btn"> -->
+    <!--                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".mini-modal-sm" ng-click="vote(1)"> -->
+    <!--                             <span class="glyphicon glyphicon-star"></span> -->
+    <!--                         </button> -->
+    <!--                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".mini-modal-sm" ng-click="vote(2)"> -->
+    <!--                             <span class="glyphicon glyphicon-star"></span> -->
+    <!--                             <span class="glyphicon glyphicon-star"></span> -->
+    <!--                         </button> -->
+    <!--                     </div> -->
+    <!--                 </div> -->
+    <!--             </div> -->
+    <!--             <div class="modal fade mini-modal-sm" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true"> -->
+    <!--                 <div class="modal-dialog modal-sm"> -->
+    <!--                     <div class="modal-content"> -->
+    <!--                         <form action="" ng-submit=""> -->
+    <!--                             <div class="modal-header"> -->
+    <!--                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button> -->
+    <!--                                 <h3 class="modal-title" id="modalLabel">Why oh! Why?</h3> -->
+    <!--                             </div> -->
+    <!--                             <div class="modal-body"> -->
+    <!--                                 <h4> -->
+    <!--                                     Message -->
+    <!--                                     <small> -->
+    <!--                                         <em class="pull-right"> -->
+    <!--                                             +{{pointsGiven}} point(s)! -->
+    <!--                                         </em> -->
+    <!--                                     </small> -->
+    <!--                                 </h4> -->
+    <!--                                 <textarea name="message" id="" cols="30" rows="5" required="required"></textarea> -->
+    <!--                             </div> -->
+    <!--                             <div class="modal-footer"> -->
+    <!--                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
+    <!--                                 <button type="submit" class="btn btn-primary">Send your thanks!</button> -->
+    <!--                             </div> -->
+    <!--                         </form> -->
+    <!--                     </div> -->
+    <!--                 </div> -->
+    <!--             </div> -->
+    <!--         </div> -->
+    <!--         <div class="col-lg-6 col-md-6 dashboard-view news-feed" ng-controller="NewsFeedController" ng-init="init()"> -->
+    <!--             <h3 class="text-center"> -->
+    <!--                 News Feed ({{newsFeed.length}}) -->
+    <!--             </h3> -->
+    <!--             <hr/> -->
+    <!--             <div class="news-feed-wrapper"> -->
+    <!--                 <div class="panel panel-primary" ng-repeat="nf in newsFeed | orderBy:'-timestamp'"> -->
+    <!--                     <div class="panel-heading"> -->
+    <!--                         <div class="panel-title"> -->
+    <!--                             Someone gave a thanks! -->
+    <!--                             <small class="pull-right"> -->
+    <!--                                 <em> -->
+    <!--                                     {{getMomentTime(nf.timestamp)}} -->
+    <!--                                 </em> -->
+    <!--                             </small> -->
+    <!--                         </div> -->
+    <!--                     </div> -->
+    <!--                     <div class="panel-body"> -->
+    <!--                         {{nf.user.name}} gave {{nf.point}} point(s) to {{nf.recipient.name}} -->
+    <!--                     </div> -->
+    <!--                 </div> -->
+    <!--             </div> -->
+    <!--         </div> -->
+    <!--         <div class="col-lg-3 col-md-3 dashboard-view top-three"> -->
+    <!--             <h3 class="text-center"> -->
+    <!--                 Top 3 -->
+    <!--             </h3> -->
+    <!--         </div> -->
+    <!--     </div> -->
+    <!-- </div> -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <!-- <script src="js/vendor/bootstrap.min.js"></script> -->
+    <!-- <script src="js/vendor/modernizr-2.6.2.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.2.2/js/material.js"> </script>
     <script src="js/vendor/angular.min.js"></script>
     <script src="js/vendor/angular-route.min.js"></script>
     <script src="js/vendor/restangular.js"></script>
