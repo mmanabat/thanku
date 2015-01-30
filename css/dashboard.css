@@ -45,9 +45,12 @@ header {
 
 .user-box {
     height: 110px;
-    border: 1px solid pink;
+    border: 1px solid #000000;
     position: relative;
-    margin: 5px
+    margin: 5px;
+    border-radius:10px;
+    -moz-border-radius:10px;
+    -webkit-border-radius:10px;
 }
 
 .user-picture {
@@ -104,7 +107,9 @@ header {
     position: relative;
 }
 
-.btn-primary, .btn-primary:hover {
+.btn-primary,
+.btn-primary:hover,
+.btn-primary:focus {
     background-color: #FF6699;
     color: #fff;
     border-color: #FF6699;
@@ -131,6 +136,19 @@ header {
 .glyphicon-log-out {
     font-size:xx-large;
     color:#fff;
+}
+
+.panel{
+    border-color: #030303 !important;
+}
+
+.panel-heading{
+    border-color: #030303 !important;
+    background-color: #FF6699 !important;
+}
+
+.panel-primary{
+
 }
 
 @media (max-width: 768px) {
