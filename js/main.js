@@ -1,8 +1,6 @@
 var mainApp = angular.module("thanku", []);
 
-mainApp
-
-mainApp.controller("LoginController", ['$scope', '$location', function($scope, $location) {
+mainApp.controller("LoginController", ['$scope', '$rootScope', '$location', function($scope, $rootScope,$location) {
     $scope.$location = {};
     $scope.init = function(){
         $scope.usernameError = null;
@@ -16,27 +14,64 @@ mainApp.controller("LoginController", ['$scope', '$location', function($scope, $
         if($scope.username != null && $scope.password != null)
         {
             toastr.success("Successfully Logged in.");
+            $rootScope.username = $scope.username;
             window.location.href = "dashboard.html";
         }
     };
 }]);
 
-mainApp.controller("UserListController", ['$scope', function($scope) {
+mainApp.controller("UserListController", ['$scope','$rootScope', '$http', function($scope, $rootScope, $http) {
     $scope.userFilter = "";
     $scope.pointsGiven = 0;
 
-    $scope.userList = [
-        {"name" : "Billy", "picture": ""},
-        {"name" : "Maricar", "picture": ""},
-        {"name" : "Steph", "picture": ""},
-        {"name" : "Mark", "picture": ""},
-        {"name" : "Tops", "picture": ""},
-        {"name" : "Benj", "picture": ""},
-    ];
+    var baseUrl = "http://13d6f749.ngrok.com";
+
+    $scope.init = function(){
+        $scope.getUserList();
+    };
+
+    $scope.getUserList = function() {
+        var promise = $http({
+            method: "GET",
+            async: true,
+            url: baseUrl + "/api/v1.0/users"
+        });
+
+        promise.success( function(data) {
+            $scope.userList = data.users;
+        }).error( function(data) {
+            toastr.error(data);
+        });
+    };
+
+    $scope.username = $rootScope.username;
 
 
-    $scope.vote = function(point) {
+    $scope.getUserList();
+
+    $scope.vote = function(user, point) {
+        $scope.recipient = user;
         $scope.pointsGiven = point;
+        $scope.message = "";
+    };
+
+    $scope.submitVote = function() {
+        console.log($scope.recipient);
+        $.ajax({
+            type: "POST",
+            url: baseUrl + "/api/v1.0/thank/1/recipient/"+ $scope.recipient.id,
+            dataType: "json",
+            data: {
+                point: $scope.pointsGiven,
+                description: $scope.message
+            },
+            success: function(data) {
+                toastr.success("You have successfully gave " +$scope.pointsGiven+" thank(s) to "+$scope.recipient.first_name+" "+$scope.recipient.last_name);
+            },
+            error: function(data) {
+                toastr.error("Failed to give thanks<br/>Error:"+data);
+            }
+        });
     };
 }]);
 
@@ -62,10 +97,10 @@ mainApp.controller("NewsFeedController", ['$scope', '$http', function($scope, $h
             {
                 toastr.success("Someone gave a thanks! Check it out!");
             }
+            $scope.currentNumberOfNewsFeed = $scope.newsFeed.length;
         }).error( function(data) {
             toastr.error(data);
         });
-        $scope.currentNumberOfNewsFeed = $scope.newsFeed.length;
     };
 
     $scope.getMomentTime = function(timestamp) {

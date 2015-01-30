@@ -1,13 +1,37 @@
+html {
+    background: none !important;
+    width: 100%;
+}
+
+h3 {
+    margin-top: 15px !important;
+    margin-bottom: 0 !important;
+}
+
+hr {
+    margin-top: 10px !important;
+    margin-bottom: 10px !important;
+}
+
 header {
-    background-color: #FF69b4;
+
 }
 
 .logo {
-    width: 150px
+    width: 150px;
+}
+
+.logo-vote {
+    background: url("../img/logo_vote.png") no-repeat top left;
+    background-size: cover;
+    height: 20px;
+    width: 20px;
+    display: inline-block;
 }
 
 .dashboard {
-    max-height: 400px;
+    background-color: #FFF;
+    overflow: hidden;
 }
 
 .dashboard-view {
@@ -15,12 +39,12 @@ header {
 }
 
 .user-box-wrapper {
-    max-height: 420px;
+    max-height: 450px;
     overflow: auto;
 }
 
 .user-box {
-    height: 90px;
+    height: 110px;
     border: 1px solid pink;
     position: relative;
     margin: 5px
@@ -34,32 +58,94 @@ header {
 }
 
 .user-name {
-    position: absolute;
     font-size: 20px;
-    left: 100px;
-    top: 0;
 }
 
 .user-vote-btn {
-    position: absolute;
-    bottom: 5px;
-    left: 100px;
+
 }
 
 .news-feed-wrapper {
-    max-height: 420px;
+    max-height: 450px;
     overflow: auto;
+}
+
+.modal-body h4{
+    font-size: 16px !important;
 }
 
 /*
 *   Custom css. . .
 */
+.display-block {
+    display: block !important;
+}
 
 .no-padding-lr {
-    padding-left: 0;
-    padding-right: 0;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+.no-margin-lr {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
 }
 
 .padded {
     padding: 10px;
+}
+
+.position-fixed {
+    position: fixed;
+    z-index: 5;
+}
+
+.position-relative {
+    position: relative;
+}
+
+.btn-primary, .btn-primary:hover {
+    background-color: #FF6699;
+    color: #fff;
+    border-color: #FF6699;
+}
+
+.btn-primary:hover {
+    background-color: #fff;
+    color: #FF6699;
+}
+
+.user-image {
+    width: 80px;
+    height: 80px;
+}
+
+.navbar {
+    margin-bottom: 0;
+}
+
+.navbar-default {
+    background-color: #FF6699 !important;
+}
+
+.glyphicon-log-out {
+    font-size:xx-large;
+    color:#fff;
+}
+
+@media (max-width: 768px) {
+    .btn-responsive {
+        padding:2px 4px;
+        font-size:80%;
+        line-height: 1;
+        border-radius:3px;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 992px) {
+    .btn-responsive {
+        padding:4px 9px;
+        font-size:90%;
+        line-height: 1.2;
+    }
 }

@@ -4,70 +4,92 @@
     <meta charset="UTF-8">
     <title>Dashboard</title>
     <link rel="stylesheet" href="css/normalize.css">
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/dashboard.css">
     <link rel="stylesheet" href="css/vendor/bootstrap.min.css" />
     <link rel="stylesheet" href="css/vendor/toastr.css" />
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/dashboard.css">
 </head>
-<body ng-cloak="true">
-    <div class="container-fluid no-padding-lr">
+<body class="row no-margin-lr" ng-cloak>
+    <div class="col-lg-12 col-md-12 container-fluid">
         <header class="padded">
-            <nav>
-                <img class="img img-responsive logo" src="img/logo.PNG" alt="Thanku"/>
+            <nav class="navbar navbar-default">
+                <a class="navbar-header" target="_self">
+                    <img class="img img-responsive logo" src="img/logo.PNG" alt="Thanku" />
+                </a>
+                <div class="display-block pull-right">
+                    <!--<span class="glyphicon glyphicon-user"></span>-->
+                    <!--<span>-->
+                        <!--{{username}}-->
+                    <!--</span>-->
+                </div>
             </nav>
         </header>
-        <div class="row dashboard padded">
-            <div class="col-lg-3 col-md-3 dashboard-view user-list" ng-controller="UserListController">
+        <div class="row dashboard padded no-margin-lr">
+            <div class="col-lg-3 col-md-3 dashboard-view user-list" ng-controller="UserListController" ng-init="init()">
+
                 <h3 class="text-center">
                     User List
                 </h3>
                 <hr/>
-                <input type="text" ng-model="userFilter" placeholder="Search user" value="" style="width: 100%; margin-bottom: 5px" />
+                <input type="text" ng-model="userFilter" placeholder="Search. . ." value="" style="width: 100%; margin-bottom: 5px" />
                 <br/>
                 <div class="no-user-found" ng-hide="filteredUser.length">
                     <p class="text-center">
                         No user found. . .
                     </p>
                 </div>
-                <div class="user-box-wrapper">
-                    <div class="user-box padded" ng-repeat="user in filteredUser = (userList | filter:{name:userFilter})">
-                        <div class="glyphicon glyphicon-user user-picture"></div>
-                        <div class="user-name">
-                            {{user.name}}
-                        </div>
-                        <div class="user-vote-btn">
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".mini-modal-sm" ng-click="vote(1)">
-                                <span class="glyphicon glyphicon-star"></span>
-                            </button>
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".mini-modal-sm" ng-click="vote(2)">
-                                <span class="glyphicon glyphicon-star"></span>
-                                <span class="glyphicon glyphicon-star"></span>
-                            </button>
+                <div class="row user-box-wrapper">
+                    <div class="col-lg-11 col-md-11 user-box padded" ng-repeat="user in filteredUser = (userList | filter:{first_name:userFilter})">
+                        <div class="row">
+                            <div class="col-lg-5 col-md-5">
+                                <img class="img img-responsive user-image" ng-src="{{user.image_url}}" />
+                            </div>
+                            <div class="col-lg-7 col-md-7 position-relative">
+                                <div class="row user-name">
+                                    {{user.first_name}}
+                                </div>
+                                <div class="row user-vote-btn">
+                                    <div class="col-lg-4 col-md-4 no-padding-lr">
+                                        <button class="btn btn-responsive btn-primary"  type="button" data-toggle="modal" data-target=".mini-modal-sm" ng-click="vote(user, 1)">
+                                            <!--<span class="glyphicon glyphicon-star"></span>-->
+                                            <div class="logo-vote"></div>
+                                        </button>
+                                    </div>
+                                    <div class="col-lg-8 col-md-8 no-padding-lr">
+                                        <button class="btn btn-responsive btn-primary"  type="button" data-toggle="modal" data-target=".mini-modal-sm" ng-click="vote(user, 2)">
+                                            <!--<span class="glyphicon glyphicon-star"></span>-->
+                                            <!--<span class="glyphicon glyphicon-star"></span>-->
+                                            <div class="logo-vote"></div>
+                                            <div class="logo-vote"></div>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="modal fade mini-modal-sm" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-sm">
                         <div class="modal-content">
-                            <form action="" ng-submit="">
+                            <form>
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                     <h3 class="modal-title" id="modalLabel">Why oh! Why?</h3>
                                 </div>
                                 <div class="modal-body">
                                     <h4>
-                                        Message
+                                        Message for {{ recipient.first_name }}
                                         <small>
                                             <em class="pull-right">
                                                 +{{pointsGiven}} point(s)!
                                             </em>
                                         </small>
                                     </h4>
-                                    <textarea name="message" id="" cols="30" rows="5" required="required"></textarea>
+                                    <textarea ng-model="message" name="message" id="" cols="30" rows="5" required="required"></textarea>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                    <button type="submit" class="btn btn-primary">Send your thanks!</button>
+                                    <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Ooppps Sorry.</button>
+                                    <button type="submit" class="btn btn-primary btn-sm" data-dismiss="modal" ng-click="submitVote()">Are you sure? YES!</button>
                                 </div>
                             </form>
                         </div>
@@ -76,14 +98,14 @@
             </div>
             <div class="col-lg-6 col-md-6 dashboard-view news-feed" ng-controller="NewsFeedController" ng-init="init()">
                 <h3 class="text-center">
-                    News Feed ({{newsFeed.length}})
+                    News Feed
                 </h3>
                 <hr/>
-                <div class="news-feed-wrapper">
+                <div class="news-feed-wrapper well" ng-show="newsFeed.length">
                     <div class="panel panel-primary" ng-repeat="nf in newsFeed | orderBy:'-timestamp'">
                         <div class="panel-heading">
                             <div class="panel-title">
-                                Someone gave a thanks!
+                                {{nf.user.first_name}} gave a thanks!
                                 <small class="pull-right">
                                     <em>
                                         {{getMomentTime(nf.timestamp)}}
@@ -92,7 +114,7 @@
                             </div>
                         </div>
                         <div class="panel-body">
-                            {{nf.user.name}} gave {{nf.point}} point(s) to {{nf.recipient.name}}
+                            {{nf.message}}
                         </div>
                     </div>
                 </div>
@@ -101,6 +123,8 @@
                 <h3 class="text-center">
                     Top 3
                 </h3>
+                <hr/>
+                <h3>Will appear in due time. :D</h3>
             </div>
         </div>
     </div>
