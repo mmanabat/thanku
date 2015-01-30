@@ -1,6 +1,14 @@
 html {
-    background: none !important;
+    /* background: none !important; */
     width: 100%;
+}
+
+html.dashboard {
+  background: none !important;
+}
+
+html.index {
+
 }
 
 h3 {
